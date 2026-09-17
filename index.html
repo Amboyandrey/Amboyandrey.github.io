@@ -47,14 +47,15 @@
       </h1>
       <p class="hero-sub">
         Niño Andrey Amboy. 2+ years shipping full-stack AI products — multi-tenant backends in
-        Python &amp; FastAPI, vector search on PostgreSQL, and real-time UIs in Next.js.
+        Python &amp; FastAPI, vector search on PostgreSQL, real-time UIs in Next.js, and, most
+        recently, trained ML systems (LoRA fine-tuning, contextual bandits) behind a Go gateway.
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#work">See the work</a>
         <a class="btn btn-ghost" href="mailto:andreyamboy13@gmail.com">andreyamboy13@gmail.com</a>
       </div>
       <ul class="hero-stats" aria-label="Highlights">
-        <li><strong>2</strong><span>end-to-end AI products</span></li>
+        <li><strong>4</strong><span>end-to-end AI products</span></li>
         <li><strong>640+</strong><span>tests against real Postgres &amp; Redis</span></li>
         <li><strong>4</strong><span>LLM providers behind one adapter</span></li>
       </ul>
@@ -94,7 +95,7 @@
     <div class="section-head">
       <span class="section-num">01</span>
       <h2>Selected work</h2>
-      <p>Two production-shaped systems, designed and built end to end — schema to streaming UI, tests to deploy.</p>
+      <p>Four production-shaped systems, designed and built end to end — from a trained ML router to a multi-tenant CRM.</p>
     </div>
 
     <!-- ReCore -->
@@ -170,6 +171,80 @@
         </aside>
       </div>
     </article>
+
+    <!-- ReRoute -->
+    <article class="project" id="reroute">
+      <div class="project-head">
+        <h3 class="project-name"><span class="re">Re</span>Route</h3>
+        <p class="project-tag">An OpenAI-compatible LLM gateway that routes each request to the cheapest model that can answer it well — trained on real outcomes, not hand-written rules.</p>
+        <div class="project-links">
+          <a class="btn btn-ghost" href="https://github.com/Amboyandrey/ReRoute" target="_blank" rel="noreferrer">Source ↗</a>
+        </div>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-body">
+          <h4>What it does</h4>
+          <ul class="feat">
+            <li><b>Two trained routers, not a heuristic</b> — a LoRA-tuned ModernBERT classifier and a LinUCB contextual bandit both learn from real outcome data to predict whether a cheap model is good enough for a given prompt, benchmarked against rule-based baselines on one cost-quality curve.</li>
+            <li><b>The bandit beat the fine-tuned model</b> — LinUCB matches a length-based baseline's quality at 63% lower cost, a bigger win than the supervised router got on the same comparison — online learning beat committing to one fixed threshold.</li>
+            <li><b>A failure case, induced on purpose</b> — simulated a biased reward signal (a lenient judge) and measured the real drift it causes: 7.5% more traffic shifted to the cheap tier, a measurable drop in true quality.</li>
+            <li><b>An OpenAI-compatible gateway in Go</b> — streaming SSE passthrough, retries with tier fallback that never returns a corrupted partial response to the caller, per-key rate limiting, Prometheus metrics on every routing decision.</li>
+            <li><b>Shipped to Kubernetes</b> — Helm chart, k3s, Prometheus + Grafana; every GPU-in-container issue hit along the way (runtime config, CNI, readiness probes, single-GPU scheduling) is documented, not hidden.</li>
+          </ul>
+        </div>
+
+        <aside class="project-side">
+          <h4>Under the hood</h4>
+          <dl class="specs">
+            <div><dt>Data</dt><dd>RouterBench — 36K prompts × 11 models, full counterfactual rewards for exact offline policy replay</dd></div>
+            <div><dt>Models</dt><dd>LoRA-tuned ModernBERT (ONNX-exported for serving) + LinUCB bandit with incremental Sherman-Morrison updates</dd></div>
+            <div><dt>Serving</dt><dd>vLLM cheap tier on a single consumer GPU — 72 → 959 tok/s across concurrency 1→16, zero errors</dd></div>
+            <div><dt>Testing</dt><dd>30 pytest + 5 Go tests, CI on every merge — go vet/gofmt, ruff, pytest</dd></div>
+          </dl>
+          <div class="chips">
+            <span>Go</span><span>Python</span><span>PyTorch</span><span>transformers</span><span>PEFT / LoRA</span><span>ONNX Runtime</span><span>scikit-learn</span><span>FastAPI</span><span>vLLM</span><span>Kubernetes</span><span>Helm</span><span>Prometheus</span><span>Grafana</span><span>Docker</span>
+          </div>
+        </aside>
+      </div>
+    </article>
+
+    <!-- ReLook -->
+    <article class="project" id="relook">
+      <div class="project-head">
+        <h3 class="project-name"><span class="re">Re</span>Look</h3>
+        <p class="project-tag">AI document triage with a human in the loop — Claude classifies and extracts, a reviewer approves before anything downstream acts.</p>
+        <div class="project-links">
+          <a class="btn btn-ghost" href="https://github.com/Amboyandrey/ReLook" target="_blank" rel="noreferrer">Source ↗</a>
+        </div>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-body">
+          <h4>What it does</h4>
+          <ul class="feat">
+            <li><b>Claude reads it, a human decides</b> — every PDF or DOCX is classified, summarized, and has its action items extracted with a confidence score; nothing routes, files, or notifies until a person approves, edits, or rejects it.</li>
+            <li><b>Approval does real work</b> — the original gets filed by category and date, every extracted request becomes a trackable task with an owner and deadline, and owners are notified in-app plus optional email/Slack.</li>
+            <li><b>The audit log teaches itself</b> — every review pairs the AI's original (frozen) output with the human's final call; an Insights view turns that history into a risky-miss rate and a data-driven recommended auto-approve threshold, once there's enough sample size behind it.</li>
+            <li><b>PDFs read natively, no OCR step</b> — scanned or image-only PDFs go to Claude inline; it reads the pages directly.</li>
+            <li><b>All four planned phases shipped</b> — CLI pipeline → review queue → routing &amp; actions → learning loop, each built on the last with no schema rewrites in between.</li>
+          </ul>
+        </div>
+
+        <aside class="project-side">
+          <h4>Under the hood</h4>
+          <dl class="specs">
+            <div><dt>Backend</dt><dd>FastAPI + SQLAlchemy, SQLite by default, Postgres-ready via <code>DATABASE_URL</code></dd></div>
+            <div><dt>Frontend</dt><dd>React 19 review screen — document next to the AI's output, approve / edit / reject</dd></div>
+            <div><dt>Extraction</dt><dd>Claude structured outputs — category, confidence, summary, requests[], entities</dd></div>
+            <div><dt>Learning loop</dt><dd>Pure aggregation over the review audit log — no extra model calls to close the loop</dd></div>
+          </dl>
+          <div class="chips">
+            <span>Python</span><span>FastAPI</span><span>SQLAlchemy</span><span>SQLite</span><span>PostgreSQL</span><span>Pydantic</span><span>Anthropic SDK</span><span>Claude</span><span>React</span><span>Vite</span>
+          </div>
+        </aside>
+      </div>
+    </article>
   </section>
 
   <!-- ============ SYSTEM MAP ============ -->
@@ -177,7 +252,7 @@
     <div class="section-head">
       <span class="section-num">02</span>
       <h2>The shape of what I build</h2>
-      <p>Both projects share one architecture. Routers never contain logic; services never import FastAPI. Hover a node.</p>
+      <p>ReCore and ReScope share one architecture. Routers never contain logic; services never import FastAPI. Hover a node.</p>
     </div>
 
     <div class="sysmap-wrap">
@@ -255,13 +330,13 @@
     <div class="section-head">
       <span class="section-num">03</span>
       <h2>Tech stack</h2>
-      <p>What I actually ship with — every item here appears in ReCore or ReScope.</p>
+      <p>What I actually ship with — every item here appears in at least one of the four projects above.</p>
     </div>
 
     <div class="stack-grid">
       <div class="stack-group">
         <h4>Languages</h4>
-        <ul><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li></ul>
+        <ul><li>Python</li><li>Go</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li></ul>
       </div>
       <div class="stack-group">
         <h4>Backend</h4>
@@ -269,19 +344,19 @@
       </div>
       <div class="stack-group">
         <h4>Frontend</h4>
-        <ul><li>Next.js (App Router)</li><li>React 19</li><li>Tailwind CSS 4</li><li>Server-Sent Events</li></ul>
+        <ul><li>Next.js (App Router)</li><li>React 19</li><li>Vite</li><li>Tailwind CSS 4</li><li>Server-Sent Events</li></ul>
       </div>
       <div class="stack-group">
         <h4>Data</h4>
-        <ul><li>PostgreSQL</li><li>pgvector</li><li>Row-level security</li><li>Redis</li></ul>
+        <ul><li>PostgreSQL</li><li>pgvector</li><li>SQLite</li><li>Row-level security</li><li>Redis</li></ul>
       </div>
       <div class="stack-group">
-        <h4>AI / LLM</h4>
-        <ul><li>Anthropic</li><li>OpenAI</li><li>Google Gemini</li><li>OpenAI-compatible</li><li>mem0</li><li>text-embeddings-inference</li><li>RAG &amp; tool-calling agents</li><li>Playwright browser agents</li></ul>
+        <h4>AI / ML</h4>
+        <ul><li>Anthropic</li><li>OpenAI</li><li>Google Gemini</li><li>OpenAI-compatible</li><li>mem0</li><li>text-embeddings-inference</li><li>RAG &amp; tool-calling agents</li><li>Playwright browser agents</li><li>PyTorch · transformers · PEFT/LoRA</li><li>ONNX Runtime · scikit-learn</li><li>vLLM</li></ul>
       </div>
       <div class="stack-group">
         <h4>Tooling &amp; infra</h4>
-        <ul><li>Docker Compose</li><li>Caddy</li><li>GitHub Actions</li><li>pytest</li><li>Playwright</li><li>Vitest</li><li>ruff · mypy</li><li>uv · pnpm</li></ul>
+        <ul><li>Docker Compose</li><li>Kubernetes · Helm</li><li>Prometheus · Grafana</li><li>Caddy</li><li>GitHub Actions</li><li>pytest · Go test</li><li>Playwright</li><li>Vitest</li><li>ruff · mypy · gofmt</li><li>uv · pnpm</li></ul>
       </div>
     </div>
 
