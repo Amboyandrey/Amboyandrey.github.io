@@ -212,6 +212,13 @@ html.js .project.in { opacity: 1; transform: none; }
 .specs dd { margin: 0; font-size: 0.9rem; color: var(--fg-2); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
 .chips span { font-family: var(--font-mono); font-size: 0.72rem; padding: 4px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-2); color: var(--fg-2); }
+.shots { display: grid; gap: 12px; margin-bottom: 32px; }
+.shots-thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 12px; }
+.shots a { display: block; }
+.shots figure { margin: 0; }
+.shots img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--bg-3); transition: border-color .2s ease, transform .2s ease; }
+.shots a:hover img { border-color: var(--accent); transform: translateY(-2px); }
+.shots figcaption { margin-top: 6px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--fg-3); }
 
 /* ---------- system map ---------- */
 .sysmap-wrap { border: 1px solid var(--line); border-radius: 22px; background: var(--bg-2); padding: clamp(12px, 2vw, 24px); box-shadow: var(--shadow); }
@@ -272,6 +279,7 @@ html.js .project.in { opacity: 1; transform: none; }
   .stack-grid, .principles { grid-template-columns: 1fr; }
   .project-head { grid-template-columns: 1fr; }
   .project-links { grid-column: 1; grid-row: auto; }
+  .shots-thumbs { grid-auto-flow: row; grid-template-columns: repeat(2, 1fr); }
   .timeline > li { grid-template-columns: 1fr; gap: 6px; }
   .nav-cta { display: none; }
 }
