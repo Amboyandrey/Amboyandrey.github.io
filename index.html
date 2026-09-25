@@ -124,7 +124,7 @@
           <ul class="feat">
             <li><b>Bring your own key</b> — Anthropic, OpenAI, Google, or any OpenAI-compatible endpoint, per workspace. Keys are envelope-encrypted and validated live before they're stored.</li>
             <li><b>Streaming that survives</b> — SSE over a Redis stream, so a refreshed tab picks the reply back up mid-answer. Stop works across processes; a retried send attaches to the in-flight generation instead of billing twice.</li>
-            <li><b>Tools the model can call</b> — web search, any HTTP endpoint a workspace registers, or tools from a connected remote MCP server, run in a bounded agent loop (timeout, result cap, iteration ceiling). Images a tool returns render right in the thread.</li>
+            <li><b>Tools the model can call</b> — web search, any HTTP endpoint a workspace registers, or tools from a connected remote MCP server, run in a bounded agent loop (timeout, result cap, iteration ceiling).</li>
             <li><b>Assistants that delegate</b> — one assistant hands a task to another as an <code>ask_&lt;name&gt;</code> tool; the delegate runs its own model, memory, and tools.</li>
             <li><b>Memory, knowledge, workflows</b> — mem0-backed recall, pgvector RAG with cited sources, and background multi-step chains replayable from a run history.</li>
           </ul>
