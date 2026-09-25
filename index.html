@@ -56,7 +56,7 @@
       </div>
       <ul class="hero-stats" aria-label="Highlights">
         <li><strong>4</strong><span>end-to-end AI products</span></li>
-        <li><strong>640+</strong><span>tests against real Postgres &amp; Redis</span></li>
+        <li><strong>690+</strong><span>tests against real Postgres &amp; Redis</span></li>
         <li><strong>4</strong><span>LLM providers behind one adapter</span></li>
       </ul>
     </div>
@@ -124,7 +124,7 @@
           <ul class="feat">
             <li><b>Bring your own key</b> — Anthropic, OpenAI, Google, or any OpenAI-compatible endpoint, per workspace. Keys are envelope-encrypted and validated live before they're stored.</li>
             <li><b>Streaming that survives</b> — SSE over a Redis stream, so a refreshed tab picks the reply back up mid-answer. Stop works across processes; a retried send attaches to the in-flight generation instead of billing twice.</li>
-            <li><b>Tools the model can call</b> — web search plus any HTTP endpoint a workspace registers, run in a bounded agent loop (timeout, result cap, iteration ceiling).</li>
+            <li><b>Tools the model can call</b> — web search, any HTTP endpoint a workspace registers, or tools from a connected remote MCP server, run in a bounded agent loop (timeout, result cap, iteration ceiling).</li>
             <li><b>Assistants that delegate</b> — one assistant hands a task to another as an <code>ask_&lt;name&gt;</code> tool; the delegate runs its own model, memory, and tools.</li>
             <li><b>Memory, knowledge, workflows</b> — mem0-backed recall, pgvector RAG with cited sources, and background multi-step chains replayable from a run history.</li>
           </ul>
@@ -136,10 +136,10 @@
             <div><dt>Tenancy</dt><dd>viewer → owner roles, one dependency chain, Postgres row-level security backstop</dd></div>
             <div><dt>Async work</dt><dd>arq workers on Redis — connector indexing, workflow runs</dd></div>
             <div><dt>Platform</dt><dd>feature flags with % rollout, usage &amp; cost ledger, immutable audit trail</dd></div>
-            <div><dt>Testing</dt><dd>430+ pytest tests on real Postgres/Redis, Playwright e2e, CI: ruff · mypy · eslint · tsc</dd></div>
+            <div><dt>Testing</dt><dd>480+ pytest tests on real Postgres/Redis, Playwright e2e, CI: ruff · mypy · eslint · tsc</dd></div>
           </dl>
           <div class="chips">
-            <span>Python</span><span>FastAPI</span><span>SQLAlchemy</span><span>Alembic</span><span>PostgreSQL</span><span>pgvector</span><span>Redis</span><span>arq</span><span>Next.js</span><span>React</span><span>TypeScript</span><span>Tailwind</span><span>Docker</span>
+            <span>Python</span><span>FastAPI</span><span>SQLAlchemy</span><span>Alembic</span><span>PostgreSQL</span><span>pgvector</span><span>Redis</span><span>arq</span><span>MCP</span><span>Next.js</span><span>React</span><span>TypeScript</span><span>Tailwind</span><span>Docker</span>
           </div>
         </aside>
       </div>
