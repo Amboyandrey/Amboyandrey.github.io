@@ -173,6 +173,7 @@
             <li><b>Semantic everything</b> — search accounts, find similar companies, and chat grounded only in what retrieval found, on a self-hosted embedding model (no per-search API cost).</li>
             <li><b>Isolated three ways</b> — tenant resolved from the <code>Host</code> header only, composite foreign keys make cross-tenant references impossible, and row-level security backstops both.</li>
             <li><b>Plans &amp; quotas</b> — platform-paid by default with per-plan ceilings; a workspace can bring its own keys for six providers and opt out of quotas.</li>
+            <li><b>Shipped the GitOps way</b> — Terraform provisions an AWS k3s node; CI builds each image, blocks it on a Trivy scan, and pushes it to GHCR; Argo CD rolls it to staging automatically and to prod through a reviewed promotion PR, with SLO burn-rate alerts and nightly S3 backups proven by a scripted restore drill.</li>
           </ul>
         </div>
 
@@ -182,10 +183,11 @@
             <div><dt>Scraping</dt><dd>Playwright + Chromium in its own arq worker image, so a browser crash never takes the queue down</dd></div>
             <div><dt>Embeddings</dt><dd>text-embeddings-inference · Qwen3-Embedding-0.6B · 1024-d in pgvector</dd></div>
             <div><dt>Deploy</dt><dd>Docker Compose behind Caddy with wildcard TLS via ACME DNS-01 for subdomain-per-tenant</dd></div>
+            <div><dt>GitOps</dt><dd>Terraform (AWS) · Helm · Argo CD staging → prod · Sealed Secrets · read-only, non-root pods</dd></div>
             <div><dt>Testing</dt><dd>210+ pytest tests, real headless Chromium with only the model call mocked</dd></div>
           </dl>
           <div class="chips">
-            <span>Python</span><span>FastAPI</span><span>Playwright</span><span>Anthropic SDK</span><span>PostgreSQL</span><span>pgvector</span><span>Redis</span><span>arq</span><span>TEI</span><span>Next.js</span><span>TypeScript</span><span>Docker</span><span>Caddy</span>
+            <span>Python</span><span>FastAPI</span><span>Playwright</span><span>Anthropic SDK</span><span>PostgreSQL</span><span>pgvector</span><span>Redis</span><span>arq</span><span>TEI</span><span>Next.js</span><span>TypeScript</span><span>Docker</span><span>Caddy</span><span>Kubernetes</span><span>Helm</span><span>Terraform</span><span>Argo CD</span>
           </div>
         </aside>
       </div>
@@ -349,7 +351,7 @@
     <div class="section-head">
       <span class="section-num">03</span>
       <h2>Tech stack</h2>
-      <p>What I actually ship with — every item here appears in at least one of the four projects above.</p>
+      <p>What I actually ship with — every item here appears in at least one of the four projects above or in my work at Arnold AI.</p>
     </div>
 
     <div class="stack-grid">
@@ -375,7 +377,7 @@
       </div>
       <div class="stack-group">
         <h4>Tooling &amp; infra</h4>
-        <ul><li>Docker Compose</li><li>Kubernetes · Helm</li><li>Prometheus · Grafana</li><li>Caddy</li><li>GitHub Actions</li><li>pytest · Go test</li><li>Playwright</li><li>Vitest</li><li>ruff · mypy · gofmt</li><li>uv · pnpm</li></ul>
+        <ul><li>Docker Compose</li><li>Kubernetes · Helm</li><li>Terraform (AWS)</li><li>Argo CD · FluxCD</li><li>Prometheus · Grafana · Loki</li><li>Trivy · Sealed Secrets</li><li>Caddy</li><li>GitHub Actions</li><li>DigitalOcean</li><li>pytest · Go test</li><li>Playwright</li><li>Vitest</li><li>ruff · mypy · gofmt</li><li>uv · pnpm</li></ul>
       </div>
     </div>
 
@@ -404,6 +406,7 @@
             <li>Implemented pgvector semantic search with dynamic embedding configuration and batched background embedding jobs.</li>
             <li>Hardened auth with CSRF protection, rate limiting, and 2FA; introduced superuser / instance-admin role separation.</li>
             <li>Shipped bulk CSV import, catalog filtering &amp; export, per-company cost tracking, OCR-based PDF extraction, and Prometheus/Grafana/Loki observability — 290+ commits through reviewed pull requests.</li>
+            <li>Deployed the platform to DigitalOcean and contributed to its FluxCD GitOps repository, configuring Helm values for PostgreSQL/pgvector and ingress across four environments.</li>
           </ul>
         </div>
       </li>
