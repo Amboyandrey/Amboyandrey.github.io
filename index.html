@@ -55,8 +55,8 @@
         <a class="btn btn-ghost" href="mailto:andreyamboy13@gmail.com">andreyamboy13@gmail.com</a>
       </div>
       <ul class="hero-stats" aria-label="Highlights">
-        <li><strong>4</strong><span>end-to-end AI products</span></li>
-        <li><strong>690+</strong><span>tests against real Postgres &amp; Redis</span></li>
+        <li><strong>5</strong><span>end-to-end AI products</span></li>
+        <li><strong>740+</strong><span>tests against real Postgres &amp; Redis</span></li>
         <li><strong>4</strong><span>LLM providers behind one adapter</span></li>
       </ul>
     </div>
@@ -79,7 +79,7 @@
           <div class="tool-call" id="tool-call" hidden>
             <span class="tc-name">search_projects</span>
             <span class="tc-args">{ "query": "AI systems built end to end" }</span>
-            <span class="tc-result">→ 4 results — see #work</span>
+            <span class="tc-result">→ 5 results — see #work</span>
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@
     <div class="section-head">
       <span class="section-num">01</span>
       <h2>Selected work</h2>
-      <p>Four production-shaped systems, designed and built end to end — from a trained ML router to a multi-tenant CRM.</p>
+      <p>Five production-shaped systems, designed and built end to end — from a trained ML router to an AI lead CRM.</p>
     </div>
 
     <!-- ReCore -->
@@ -110,11 +110,14 @@
 
       <div class="shots">
           <a href="img/recore/01-chat-knowledge.png" target="_blank" rel="noreferrer"><figure><img src="img/recore/01-chat-knowledge.png" alt="ReCore chat answering from indexed website content, with cited sources in the sidebar" width="1919" height="953" loading="lazy"><figcaption>chat · knowledge retrieval with cited sources</figcaption></figure></a>
-        <div class="shots-thumbs">
+        <div class="shots-thumbs wrap">
             <a href="img/recore/02-workspace.png" target="_blank" rel="noreferrer"><figure><img src="img/recore/02-workspace.png" alt="ReCore workspace overview with conversations, workflows and admin links" width="1919" height="953" loading="lazy"><figcaption>workspace</figcaption></figure></a>
             <a href="img/recore/03-providers.png" target="_blank" rel="noreferrer"><figure><img src="img/recore/03-providers.png" alt="ReCore LLM providers page with masked keys and enabled models" width="1919" height="953" loading="lazy"><figcaption>providers</figcaption></figure></a>
             <a href="img/recore/04-workflows.png" target="_blank" rel="noreferrer"><figure><img src="img/recore/04-workflows.png" alt="ReCore ReFlow workflow builder" width="1919" height="953" loading="lazy"><figcaption>reflow workflows</figcaption></figure></a>
             <a href="img/recore/05-home.png" target="_blank" rel="noreferrer"><figure><img src="img/recore/05-home.png" alt="ReCore home page with system status and workspaces" width="1919" height="953" loading="lazy"><figcaption>home</figcaption></figure></a>
+            <a href="img/recore/06-tools.png" target="_blank" rel="noreferrer"><figure><img src="img/recore/06-tools.png" alt="ReCore tools page with web search and a registered third-party HTTP tool" width="1919" height="958" loading="lazy"><figcaption>http tools</figcaption></figure></a>
+            <a href="img/recore/07-mcp-servers.png" target="_blank" rel="noreferrer"><figure><img src="img/recore/07-mcp-servers.png" alt="ReCore MCP servers page with DeepWiki and a local n8n lead_tools server connected" width="1919" height="959" loading="lazy"><figcaption>mcp servers</figcaption></figure></a>
+            <a href="img/recore/08-mcp-qualify-lead.png" target="_blank" rel="noreferrer"><figure><img src="img/recore/08-mcp-qualify-lead.png" alt="ReCore chat calling the qualify_lead MCP tool and showing the scored lead with a draft reply" width="1919" height="957" loading="lazy"><figcaption>mcp tool call in chat</figcaption></figure></a>
         </div>
       </div>
 
@@ -262,6 +265,53 @@
           </dl>
           <div class="chips">
             <span>Python</span><span>FastAPI</span><span>SQLAlchemy</span><span>SQLite</span><span>PostgreSQL</span><span>Pydantic</span><span>Anthropic SDK</span><span>Claude</span><span>React</span><span>Vite</span>
+          </div>
+        </aside>
+      </div>
+    </article>
+
+    <!-- LeadDesk -->
+    <article class="project" id="leaddesk">
+      <div class="project-head">
+        <h3 class="project-name">LeadDesk</h3>
+        <p class="project-tag">A lead CRM where AI reads each new lead's website, scores the fit, and drafts a reply — and any AI assistant can do the same through an MCP server.</p>
+        <div class="project-links">
+          <a class="btn btn-ghost" href="https://github.com/Amboyandrey/leaddesk" target="_blank" rel="noreferrer">Source ↗</a>
+        </div>
+      </div>
+
+      <div class="shots">
+          <a href="img/leaddesk/01-leads.png" target="_blank" rel="noreferrer"><figure><img src="img/leaddesk/01-leads.png" alt="LeadDesk leads ranked by priority with status, fit score and last touch" width="1919" height="961" loading="lazy"><figcaption>leads · ranked by fit, cooled by time, lifted by activity</figcaption></figure></a>
+        <div class="shots-thumbs">
+            <a href="img/leaddesk/02-n8n-workflow.png" target="_blank" rel="noreferrer"><figure><img src="img/leaddesk/02-n8n-workflow.png" alt="n8n Qualify Lead workflow: fetch website, AI scoring with a JSON schema, decide and save, push to LeadDesk" width="1919" height="963" loading="lazy"><figcaption>n8n qualify lead</figcaption></figure></a>
+            <a href="img/leaddesk/03-qualify-via-mcp.png" target="_blank" rel="noreferrer"><figure><img src="img/leaddesk/03-qualify-via-mcp.png" alt="A lead qualified from ReCore chat through the MCP server, with fit score, summary and draft reply" width="1919" height="957" loading="lazy"><figcaption>qualify via mcp</figcaption></figure></a>
+            <a href="img/leaddesk/04-new-lead.png" target="_blank" rel="noreferrer"><figure><img src="img/leaddesk/04-new-lead.png" alt="LeadDesk new lead form: website, company, contact and message" width="1919" height="964" loading="lazy"><figcaption>new lead</figcaption></figure></a>
+            <a href="img/leaddesk/05-companies.png" target="_blank" rel="noreferrer"><figure><img src="img/leaddesk/05-companies.png" alt="LeadDesk companies with industry and AI-written summaries" width="1919" height="955" loading="lazy"><figcaption>companies</figcaption></figure></a>
+        </div>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-body">
+          <h4>What it does</h4>
+          <ul class="feat">
+            <li><b>AI qualifies every lead</b> — an n8n workflow reads the company's website, scores the fit from 0 to 100, summarizes the company, and drafts a first reply in about 2 to 3 seconds; fixed rules then mark it qualified, needs review, or not a fit.</li>
+            <li><b>Know who to call first</b> — open leads are ranked in SQL by fit score, cooled by time since the last touch and lifted by recent calls and emails, so strong leads nobody touches slowly drop.</li>
+            <li><b>A pipeline that can't be skipped</b> — new → qualified → contacted → won or lost; invalid moves are refused with the allowed options, and every change lands on the lead's timeline.</li>
+            <li><b>Callable from any AI assistant</b> — the workflow is a token-protected MCP server, so ReCore or Claude can qualify a lead in chat; every result is pushed back to LeadDesk and stored once.</li>
+            <li><b>Never blocked by an outage</b> — scoring runs in the background with retries and backoff; a failed score marks the lead, which can be scored again with one click.</li>
+          </ul>
+        </div>
+
+        <aside class="project-side">
+          <h4>Under the hood</h4>
+          <dl class="specs">
+            <div><dt>Backend</dt><dd>Django REST Framework API and HTMX pages sharing the same services and rules</dd></div>
+            <div><dt>Async work</dt><dd>Celery worker on Redis calls the n8n MCP tool; ranked pages cached in Redis, invalidated on every write</dd></div>
+            <div><dt>Data</dt><dd>scores limited to 0–100 by database constraints, indexes matched to real queries, full scoring history</dd></div>
+            <div><dt>Testing</dt><dd>55 pytest tests on real PostgreSQL, including fixed query counts so lists never go N+1</dd></div>
+          </dl>
+          <div class="chips">
+            <span>Python</span><span>Django</span><span>DRF</span><span>Celery</span><span>PostgreSQL</span><span>Redis</span><span>HTMX</span><span>n8n</span><span>MCP</span><span>Docker</span>
           </div>
         </aside>
       </div>
